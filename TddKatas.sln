@@ -23,13 +23,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diversion", "Diversion\Dive
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EightQueens", "EightQueens\EightQueens.csproj", "{2513331B-B718-4547-90A4-FF42ABF2FEE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzzPlus", "FizzBuzz\FizzBuzzPlus.csproj", "{487CFACC-7BFC-41B3-9AE6-85B903D91D25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{65D1103D-5C94-4D51-9085-C785BCCDE020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +71,12 @@ Global
 		{2513331B-B718-4547-90A4-FF42ABF2FEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2513331B-B718-4547-90A4-FF42ABF2FEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2513331B-B718-4547-90A4-FF42ABF2FEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487CFACC-7BFC-41B3-9AE6-85B903D91D25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487CFACC-7BFC-41B3-9AE6-85B903D91D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487CFACC-7BFC-41B3-9AE6-85B903D91D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487CFACC-7BFC-41B3-9AE6-85B903D91D25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
