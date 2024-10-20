@@ -25,6 +25,6 @@ public class BalancedParenthesesTests
     [InlineData("{ () }[[{}]]", true)]
     public void Tests(string input, bool expected)
     {
-        Assert.Equal(expected, BalancedParenthesesImpl.IsBalanced(input));
+        Assert.Equal(expected, BalancedParentheses.IsBalanced(input));
     }
 }

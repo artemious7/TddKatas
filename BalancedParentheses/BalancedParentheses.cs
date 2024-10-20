@@ -1,6 +1,6 @@
 ﻿namespace BalancedParentheses;
 
-public static class BalancedParenthesesImpl
+public static class BalancedParentheses
 {
     internal static bool IsBalanced(string input)
     {
