@@ -24,7 +24,7 @@ public class SimpleFizzBuzzTests
 
     [InlineData(new[] { 2, 1, 0 }, new[] { "2", "1", "zzub zzif" })]
     [InlineData(new[] { 22, 13 }, new[] { "22", "13" })]
-    public void SimpleTests(int[] numbers, string[] expected)
+    public void Tests(int[] numbers, string[] expected)
     {
         var fizzBuzzer = new FizzBuzzer();
         var reverser = new StringReverser();
@@ -36,7 +36,7 @@ public class SimpleFizzBuzzTests
     [Theory]
     [InlineData(Ordering.AscendingOrUnknown, new[] { "one", "two" })]
     [InlineData(Ordering.Descending, new[] { "one-reversed", "two-reversed" })]
-    public void SimpleFizzBuzz_ReversesIfDescending(Ordering ordering, string[] expected)
+    public void ReversesIfDescending(Ordering ordering, string[] expected)
     {
         var fizzBuzzer = Substitute.For<IFizzBuzzer>();
         fizzBuzzer.FizzBuzzIt(1).Returns("one");
@@ -59,7 +59,7 @@ public class SimpleFizzBuzzTests
     [InlineData(new int[] { 1 }, new string[] { "1" })]
     [InlineData(new int[] { 1, 2 }, new string[] { "1", "2" })]
     [InlineData(new int[] { 1, 2, 3 }, new string[] { "1", "2", "3" })]
-    public void SimpleFizzBuzz_ReturnsArrayWithSameLengthInSameOrderOfElements(int[] numbers, string[] expected)
+    public void ReturnsArrayWithSameLengthInSameOrderOfElements(int[] numbers, string[] expected)
     {
         var fizzBuzzer = Substitute.For<IFizzBuzzer>();
         // Return the input number as a string

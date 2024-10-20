@@ -41,7 +41,7 @@ public class ComplexFizzBuzzTests
     [InlineData(new[] { 5, 3, 1 }, new[] { "zzub", "zzif", "1" })]
     [InlineData(new[] { 15, 5, 1 }, new[] { "zzub zzif", "zzub", "1" })]
     [InlineData(new[] { 15, 5, 3 }, new[] { "zzub zzif", "zzub", "zzif" })]
-    public void ComplexTests(int[] numbers, string[] expected)
+    public void Tests(int[] numbers, string[] expected)
     {
         var results = ComplexFizzBuzz.FizzBuzzIt(numbers);
         results.Should().Equal(expected);
