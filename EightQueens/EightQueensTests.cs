@@ -182,7 +182,7 @@ public class EightQueensTests(ITestOutputHelper testOutput)
     public void TestIsNoThreat(string description, int[][] boardArray, bool expectedIsNoThreat)
     {
         // Arrange
-        using var board = new Board(boardArray, 3, false);
+        var board = new Board(boardArray, 3, false);
 
         // Act
         bool isNoThreat = board.IsNoThreat();
@@ -220,7 +220,7 @@ public class EightQueensTests(ITestOutputHelper testOutput)
     [MemberData(nameof(diagonals))]
     public void TestDiagonals(string description, int[][] boardArray, int[][] expectedRightwardDiagonals, int[][] expectedLeftwardDiagonals)
     {
-        using Board board = new(boardArray, 3, false);
+        Board board = new(boardArray, 3, false);
         board.RightwardDiagonals().Should().BeEquivalentTo(expectedRightwardDiagonals, description);
         board.LeftwardDiagonals().Should().BeEquivalentTo(expectedLeftwardDiagonals, description);
     }
@@ -231,10 +231,10 @@ public class EightQueensTests(ITestOutputHelper testOutput)
     public void PlaceQueensTest(int boardSize)
     {
         // Arrange
-        using Board board = new(boardSize);
+        Board board = new(boardSize);
 
         // Act
-        using Board? newBoard = board.PlaceQueens();
+        Board? newBoard = board.PlaceQueens();
         newBoard.Should().NotBeNull();
         testOutput.WriteLine(newBoard!.Print());
 

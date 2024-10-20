@@ -3,7 +3,7 @@ using System.Buffers;
 
 namespace EightQueens;
 
-public sealed class Board : IDisposable
+public sealed class Board
 {
     private readonly int boardSize;
     private readonly int[][] array;
@@ -25,7 +25,7 @@ public sealed class Board : IDisposable
 
     private IEnumerable<IEnumerable<int>> Rows => array.Select(Row);
 
-    static int[] NewArray(int size) => new int[size];
+    private static int[] NewArray(int size) => new int[size];
 
     public Board? PlaceQueens()
     {
@@ -63,7 +63,7 @@ public sealed class Board : IDisposable
                 return null;
             }
 
-            using Board potentialBoard = CopyBoard();
+            Board potentialBoard = CopyBoard();
             potentialBoard.PlaceQueen(row, column);
 
             Board? potentialBoardWithQueensPlaced = potentialBoard.PlaceQueensImpl(queensLeft - 1, startRow: row + 1);
@@ -128,18 +128,9 @@ public sealed class Board : IDisposable
     private int Height => boardSize;
     private Board CopyBoard() => new(CopyBoardArray(array), boardSize, true);
 
-    //private void CopyTo(Board board)
-    //{
-    //    if (UseRentedArrays)
-    //    {
-    //        ReturnRentedRows();
-    //    }
-    //    board.array = CopyArray(array);
-    //}
+    private int[] CopyRow(IEnumerable<int> row) => row.ToArray();
 
-    int[] CopyRow(IEnumerable<int> row) => row.ToArray();
-
-    int[][] CopyBoardArray(IEnumerable<IEnumerable<int>> array) => array.Select(CopyRow).ToArray();
+    private int[][] CopyBoardArray(IEnumerable<IEnumerable<int>> array) => array.Select(CopyRow).ToArray();
     private bool HasFreeSpace => Rows.Any(static row => row.Any(IsFree));
     private static bool IsFree(int cell) => cell == 0;
     private bool IsFree(int row, int column)
@@ -169,7 +160,7 @@ public sealed class Board : IDisposable
 
     internal int[][] LeftwardDiagonals()
     {
-        using Board reversedBoard = new(Rows.Select(row => row.Reverse().ToArray()).ToArray(), boardSize, false);
+        Board reversedBoard = new(Rows.Select(row => row.Reverse().ToArray()).ToArray(), boardSize, false);
         return reversedBoard.RightwardDiagonals();
     }
 
@@ -216,13 +207,13 @@ public sealed class Board : IDisposable
 
     private static bool IsNoThreat(IEnumerable<int> rowOrColumnOrDiagonal) => !rowOrColumnOrDiagonal.Where(IsQueen).Skip(1).Any();
 
-    const int Queen = 1;
-    const int Threat = -1;
+    private const int Queen = 1;
+    private const int Threat = -1;
 
     private static bool IsQueen(int cell) => cell == Queen;
     public int QueensCount => array.SelectMany(Row).Count(IsQueen);
     public string Print() => string.Join(Environment.NewLine, Rows.Select(row => string.Join("", row.Select(PrintCell))));
-    IEnumerable<int> Row(int[] row) => row;
+    private IEnumerable<int> Row(int[] row) => row;
     private static string PrintCell(int cell) =>
         !IsQueen(cell)
             ? IsFree(cell)
@@ -231,10 +222,6 @@ public sealed class Board : IDisposable
             : "Q";
 
     public override string ToString() => Print().Replace(Environment.NewLine, " | ");
-
-    public void Dispose()
-    {
-    }
 
     public string Map => Print();
 }
