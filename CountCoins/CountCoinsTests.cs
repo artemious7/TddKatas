@@ -1,4 +1,4 @@
-namespace CountCoinsTddKata;
+namespace CountCoins;
 
 public class CountCoinsTests
 {

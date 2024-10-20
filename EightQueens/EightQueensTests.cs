@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit.Abstractions;
 
-namespace EightQueensTddKata;
+namespace EightQueens;
 
 public class EightQueensTests(ITestOutputHelper testOutput)
 {

@@ -1,4 +1,4 @@
-﻿namespace CombinedNumberTddKata;
+﻿namespace CombinedNumber;
 
 public class NumberHelpersTests
 {

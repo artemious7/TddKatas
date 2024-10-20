@@ -1,4 +1,4 @@
-﻿namespace CombinedNumberTddKata;
+﻿namespace CombinedNumber;
 
 internal static class NumberHelpers
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace AnagramsTddKata;
+namespace Anagrams;
 
 public static class Anagrams
 {

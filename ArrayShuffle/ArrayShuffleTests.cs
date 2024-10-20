@@ -1,4 +1,4 @@
-namespace ArrayShuffleTddKata;
+namespace ArrayShuffle;
 
 public class ArrayShuffleTests
 {

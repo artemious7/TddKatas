@@ -1,4 +1,4 @@
-namespace DiversionTddKata;
+namespace Diversion;
 
 public class DiversionTests
 {

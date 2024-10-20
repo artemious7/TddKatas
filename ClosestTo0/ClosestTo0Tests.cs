@@ -1,4 +1,4 @@
-namespace ClosestTo0TddKata;
+namespace ClosestTo0;
 
 public class ClosestTo0Tests
 {

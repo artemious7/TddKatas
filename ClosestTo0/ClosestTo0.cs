@@ -1,4 +1,4 @@
-﻿namespace ClosestTo0TddKata;
+﻿namespace ClosestTo0;
 
 internal static class ClosestTo0
 {

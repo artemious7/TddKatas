@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using System.Buffers;
 
-namespace EightQueensTddKata;
+namespace EightQueens;
 
 public sealed class Board : IDisposable
 {

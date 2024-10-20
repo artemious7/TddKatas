@@ -1,4 +1,4 @@
-namespace AnagramsTddKata;
+namespace Anagrams;
 
 public class AnagramsTests
 {

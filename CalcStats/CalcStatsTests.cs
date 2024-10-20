@@ -1,4 +1,4 @@
-namespace CalcStatsTddKata;
+namespace CalcStats;
 
 public class CalcStatsTests
 {

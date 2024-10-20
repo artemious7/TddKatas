@@ -1,6 +1,6 @@
-using static CombinedNumberTddKata.CombinedNumber;
+using static CombinedNumber.CombinedNumber;
 
-namespace CombinedNumberTddKata;
+namespace CombinedNumber;
 
 public class CombinedNumberTests
 {
