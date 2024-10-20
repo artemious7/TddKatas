@@ -8,13 +8,10 @@ public sealed class Board
     private readonly int boardSize;
     private readonly int[][] array;
 
-    public Board(int[][] array, int boardSize, bool isArrayRented)
+    public Board(int[][] array, int boardSize)
     {
         this.boardSize = boardSize;
-        if (!isArrayRented)
-            this.array = CopyBoardArray(array);
-        else
-            this.array = array;
+        this.array = CopyBoardArray(array);
     }
 
     public Board(int boardSize)
@@ -91,7 +88,10 @@ public sealed class Board
             {
                 int column = queenRow + queenColumn - rowOrColumn;
                 if (column < 0 || column >= Width)
+                {
                     continue;
+                }
+
                 MarkAsThreatIfFree(rowOrColumn, column);
             }
         }
@@ -102,7 +102,10 @@ public sealed class Board
             for (int rowOrColumn = 0; rowOrColumn + columnOffset < Width && rowOrColumn < Height; rowOrColumn++)
             {
                 if (rowOrColumn + columnOffset < 0)
+                {
                     continue;
+                }
+
                 MarkAsThreatIfFree(rowOrColumn, rowOrColumn + columnOffset);
             }
         }
@@ -126,7 +129,7 @@ public sealed class Board
 
     private int Width => boardSize;
     private int Height => boardSize;
-    private Board CopyBoard() => new(CopyBoardArray(array), boardSize, true);
+    private Board CopyBoard() => new(CopyBoardArray(array), boardSize);
 
     private int[] CopyRow(IEnumerable<int> row) => row.ToArray();
 
@@ -160,7 +163,7 @@ public sealed class Board
 
     internal int[][] LeftwardDiagonals()
     {
-        Board reversedBoard = new(Rows.Select(row => row.Reverse().ToArray()).ToArray(), boardSize, false);
+        Board reversedBoard = new(Rows.Select(row => row.Reverse().ToArray()).ToArray(), boardSize);
         return reversedBoard.RightwardDiagonals();
     }
 
