@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.1184077">
+	<PropertyGroup>
+		<JavaScriptTestRoot>\</JavaScriptTestRoot>
+		<JavaScriptTestFramework>Jest</JavaScriptTestFramework>
+		<!-- Folder where production build objects will be placed -->
+		<BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
+	</PropertyGroup>
+</Project>
