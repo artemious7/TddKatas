@@ -228,9 +228,6 @@ public class EightQueensTests(ITestOutputHelper testOutput)
     [Theory]
     [InlineData(8)]
     [InlineData(12)]
-    //[InlineData(14)]
-    //[InlineData(16)]
-    //[InlineData(18)]
     public void PlaceQueensTest(int boardSize)
     {
         // Arrange
