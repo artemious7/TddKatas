@@ -3,7 +3,7 @@ namespace FizzBuzzWithATwist.Approach1;
 public class FizzBuzzTests
 {
     [Theory]
-    // zero elements
+    // 0 elements
     [InlineData(new int[] { }, new string[] { })]
 
     // 1 element
@@ -31,10 +31,10 @@ public class FizzBuzzTests
     [InlineData(new[] { 1, 2, 5 }, new[] { "1", "2", "buzz" })]
     [InlineData(new[] { 1, 2, 15 }, new[] { "1", "2", "fizz buzz" })]
 
-    // 3 elements, descending, numbers only
+    // 3 elements, descending, numbers only in the output
     [InlineData(new[] { 4, 2, 1 }, new[] { "4", "2", "1" })]
 
-    // 3 elements, descending, one is divisible by 3 or 5
+    // 3 elements, descending, one number is divisible by 3 or 5
     [InlineData(new[] { 3, 2, 1 }, new[] { "zzif", "2", "1" })]
     [InlineData(new[] { 5, 3, 1 }, new[] { "zzub", "zzif", "1" })]
     [InlineData(new[] { 15, 5, 1 }, new[] { "zzub zzif", "zzub", "1" })]
