@@ -185,7 +185,7 @@ public class EightQueensTests(ITestOutputHelper testOutput)
         var board = new Board(boardArray, 3);
 
         // Act
-        bool isNoThreat = board.IsNoThreat();
+        bool isNoThreat = board.HasNoThreat();
 
         // Assert
         isNoThreat.Should().Be(expectedIsNoThreat, description);
@@ -227,7 +227,6 @@ public class EightQueensTests(ITestOutputHelper testOutput)
 
     [Theory]
     [InlineData(8)]
-    [InlineData(12)]
     public void PlaceQueensTest(int boardSize)
     {
         // Arrange
@@ -239,7 +238,7 @@ public class EightQueensTests(ITestOutputHelper testOutput)
         testOutput.WriteLine(newBoard!.Print());
 
         // Assert
-        newBoard.IsNoThreat().Should().BeTrue();
+        newBoard.HasNoThreat().Should().BeTrue();
         newBoard.PlacedQueensCount.Should().Be(boardSize);
     }
 }

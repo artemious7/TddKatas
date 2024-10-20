@@ -20,10 +20,11 @@ public sealed class Board
         array = Enumerable.Range(0, boardSize).Select(r => new int[boardSize]).ToArray();
     }
 
-    public Board? PlaceQueens() => PlaceQueensImplementation(queensLeft: boardSize, startRow: 0);
+    public Board? PlaceQueens() => PlaceQueensRecursive(queensLeft: boardSize);
 
-    private Board? PlaceQueensImplementation(int queensLeft, int startRow = 0)
+    private Board? PlaceQueensRecursive(int queensLeft, int startRow = 0)
     {
+        // no more queens to place - we've got our answer
         if (queensLeft == 0)
         {
             return this;
@@ -34,38 +35,34 @@ public sealed class Board
             return null;
         }
 
-        return Enumerable.Range(startRow, Height - startRow)
-            .Select(ProcessRow)
-            .FirstOrDefault(r => r is { });
+        return
+            Enumerable.Range(startRow, Height - startRow)
+                .Select(PlaceQueenOnRow)
+                .FirstOrDefault(board => board is not null);
 
-        Board? ProcessRow(int row) =>
+        Board? PlaceQueenOnRow(int row) =>
             Enumerable.Range(0, Width)
-                .Select(column => ProcessColumn(row, column))
-                .FirstOrDefault(r => r is { });
+                .Where(column => IsFreeCell(row, column))
+                .Select(column => RecursivelyCheckIfQueenCanBeSafelyPlacedInCell(row, column))
+                .FirstOrDefault(board => board is not null);
 
-        Board? ProcessColumn(int row, int column)
+        // try place queen in the cell and recursively check if there are no threats
+        Board? RecursivelyCheckIfQueenCanBeSafelyPlacedInCell(int row, int column)
         {
-            if (!IsFree(row, column))
-            {
-                return null;
-            }
-
             Board potentialBoard = CopyBoard();
             potentialBoard.PlaceQueen(row, column);
 
-            Board? potentialBoardWithQueensPlaced = potentialBoard.PlaceQueensImplementation(queensLeft - 1, startRow: row + 1);
-            // if it can be constructed, we found our answer. Otherwise, return null.
-            return potentialBoardWithQueensPlaced?.CopyBoard();
+            return potentialBoard.PlaceQueensRecursive(queensLeft - 1, startRow: row + 1);
         }
     }
 
-    private bool HasFreeSpace => Rows.Any(static row => row.Any(IsFree));
+    private bool HasFreeSpace => Rows.Any(static cellsInRow => cellsInRow.Any(IsFree));
 
     private IEnumerable<IEnumerable<int>> Rows => array.Select(Row);
 
     private static IEnumerable<int> Row(int[] row) => row;
 
-    private static bool IsFree(int cell) => cell == 0;
+    private static bool IsFree(int cellValue) => cellValue == 0;
 
     private int Width => boardSize;
     private int Height => boardSize;
@@ -76,15 +73,15 @@ public sealed class Board
 
     private static int[] CopyRow(IEnumerable<int> row) => row.ToArray();
 
-    private bool IsFree(int row, int column)
+    private bool IsFreeCell(int row, int column)
     {
         if (row >= Height || column >= Width)
         {
             throw new InvalidOperationException($"Row {row} and column {column} are invalid");
         }
 
-        int cell = array[row][column];
-        return IsFree(cell);
+        int cellValue = array[row][column];
+        return IsFree(cellValue);
     }
 
     private void PlaceQueen(int queenRow, int queenColumn)
@@ -142,7 +139,7 @@ public sealed class Board
 
         void MarkAsThreatIfFree(int row, int column)
         {
-            if (IsFree(row, column))
+            if (IsFreeCell(row, column))
             {
                 array[row][column] = Threat;
             }
@@ -153,26 +150,26 @@ public sealed class Board
 
     private const int Threat = -1;
 
-    public bool IsNoThreat()
+    public bool HasNoThreat()
     {
-        return Rows.All(IsNoThreat) &&
-            Transpose().All(IsNoThreat) &&
-            RightwardDiagonals().All(IsNoThreat) &&
-            LeftwardDiagonals().All(IsNoThreat);
+        return Rows.All(SequenceHasNoThreat) &&
+            TransposeBoard().All(SequenceHasNoThreat) &&
+            RightwardDiagonals().All(SequenceHasNoThreat) &&
+            LeftwardDiagonals().All(SequenceHasNoThreat);
 
-        int[][] Transpose()
+        int[][] TransposeBoard()
         {
-            int[][] result = new int[Height][];
+            int[][] transposedBoard = new int[Height][];
 
             for (int column = 0; column < Width; column++)
             {
-                result[column] = new int[Height];
+                transposedBoard[column] = new int[Height];
                 for (int row = 0; row < Height; row++)
                 {
-                    result[column][row] = array[row][column];
+                    transposedBoard[column][row] = array[row][column];
                 }
             }
-            return result;
+            return transposedBoard;
         }
     }
 
@@ -208,7 +205,7 @@ public sealed class Board
         return reversedBoard.RightwardDiagonals();
     }
 
-    private static bool IsNoThreat(IEnumerable<int> rowOrColumnOrDiagonal) =>
+    private static bool SequenceHasNoThreat(IEnumerable<int> rowOrColumnOrDiagonal) =>
         !rowOrColumnOrDiagonal.Where(IsQueen).Skip(1).Any();
 
     private static bool IsQueen(int cell) => cell == Queen;
