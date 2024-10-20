@@ -116,6 +116,6 @@ column  are         separated  by      at      least     one         space.
 
         TestContext.Out.WriteLine(result);
 
-        Assert.AreEqual(expected.Trim(), result);
+        Assert.That(result, Is.EqualTo(expected.Trim()));
     }
 }
