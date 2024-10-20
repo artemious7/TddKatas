@@ -59,8 +59,33 @@ public sealed class Board
         }
     }
 
+    private bool HasFreeSpace => Rows.Any(static row => row.Any(IsFree));
+
+    private IEnumerable<IEnumerable<int>> Rows => array.Select(Row);
+
+    private static IEnumerable<int> Row(int[] row) => row;
+
+    private static bool IsFree(int cell) => cell == 0;
+
     private int Width => boardSize;
     private int Height => boardSize;
+
+    private Board CopyBoard() => new(CopyBoardArray(array), boardSize);
+
+    private static int[][] CopyBoardArray(IEnumerable<IEnumerable<int>> array) => array.Select(CopyRow).ToArray();
+
+    private static int[] CopyRow(IEnumerable<int> row) => row.ToArray();
+
+    private bool IsFree(int row, int column)
+    {
+        if (row >= Height || column >= Width)
+        {
+            throw new InvalidOperationException($"Row {row} and column {column} are invalid");
+        }
+
+        int cell = array[row][column];
+        return IsFree(cell);
+    }
 
     private void PlaceQueen(int queenRow, int queenColumn)
     {
@@ -114,65 +139,28 @@ public sealed class Board
                 MarkAsThreatIfFree(queenRow, column);
             }
         }
-    }
 
-    private Board CopyBoard() => new(CopyBoardArray(array), boardSize);
-
-    private static int[] CopyRow(IEnumerable<int> row) => row.ToArray();
-
-    private static int[][] CopyBoardArray(IEnumerable<IEnumerable<int>> array) => array.Select(CopyRow).ToArray();
-    private bool HasFreeSpace => Rows.Any(static row => row.Any(IsFree));
-    private IEnumerable<IEnumerable<int>> Rows => array.Select(Row);
-    private static bool IsFree(int cell) => cell == 0;
-    private bool IsFree(int row, int column)
-    {
-        if (row >= Height || column >= Width)
+        void MarkAsThreatIfFree(int row, int column)
         {
-            throw new InvalidOperationException($"Row {row} and column {column} are invalid");
+            if (IsFree(row, column))
+            {
+                array[row][column] = Threat;
+            }
         }
-        int cell = array[row][column];
-
-        return IsFree(cell);
     }
 
-    internal int[][] RightwardDiagonals()
-    {
-        var diagonals = new List<int[]>();
-        for (int column = 0; column < Width; column++)
-        {
-            diagonals.Add(GetDiagonal(0, column));
-        }
-        for (int row = 1; row < Height; row++)
-        {
-            diagonals.Add(GetDiagonal(row, 0));
-        }
-        return [.. diagonals];
-    }
+    private const int Queen = 1;
 
-    internal int[][] LeftwardDiagonals()
-    {
-        Board reversedBoard = new(Rows.Select(row => row.Reverse().ToArray()).ToArray(), boardSize);
-        return reversedBoard.RightwardDiagonals();
-    }
-
-    private int[] GetDiagonal(int rowOffset, int columnOffset)
-    {
-        var result = new List<int>();
-        for (int i = 0; i + rowOffset < Height && i + columnOffset < Width; i++)
-        {
-            result.Add(array[i + rowOffset][i + columnOffset]);
-        }
-        return [.. result];
-    }
+    private const int Threat = -1;
 
     public bool IsNoThreat()
     {
         return Rows.All(IsNoThreat) &&
-            Transpile().All(IsNoThreat) &&
+            Transpose().All(IsNoThreat) &&
             RightwardDiagonals().All(IsNoThreat) &&
             LeftwardDiagonals().All(IsNoThreat);
 
-        int[][] Transpile()
+        int[][] Transpose()
         {
             int[][] result = new int[Height][];
 
@@ -188,31 +176,64 @@ public sealed class Board
         }
     }
 
-    private void MarkAsThreatIfFree(int row, int column)
+    internal int[][] RightwardDiagonals()
     {
-        if (IsFree(row, column))
+        var diagonals = new List<int[]>();
+        for (int column = 0; column < Width; column++)
         {
-            array[row][column] = Threat;
+            diagonals.Add(GetDiagonal(0, column));
+        }
+
+        for (int row = 1; row < Height; row++)
+        {
+            diagonals.Add(GetDiagonal(row, 0));
+        }
+
+        return [.. diagonals];
+
+        int[] GetDiagonal(int rowOffset, int columnOffset)
+        {
+            var result = new List<int>();
+            for (int i = 0; i + rowOffset < Height && i + columnOffset < Width; i++)
+            {
+                result.Add(array[i + rowOffset][i + columnOffset]);
+            }
+            return [.. result];
         }
     }
 
-    private static bool IsNoThreat(IEnumerable<int> rowOrColumnOrDiagonal) => !rowOrColumnOrDiagonal.Where(IsQueen).Skip(1).Any();
+    internal int[][] LeftwardDiagonals()
+    {
+        Board reversedBoard = new(Rows.Select(row => row.Reverse().ToArray()).ToArray(), boardSize);
+        return reversedBoard.RightwardDiagonals();
+    }
 
-    private const int Queen = 1;
-    private const int Threat = -1;
+    private static bool IsNoThreat(IEnumerable<int> rowOrColumnOrDiagonal) =>
+        !rowOrColumnOrDiagonal.Where(IsQueen).Skip(1).Any();
 
     private static bool IsQueen(int cell) => cell == Queen;
-    public int QueensCount => array.SelectMany(Row).Count(IsQueen);
-    public string Print() => string.Join(Environment.NewLine, Rows.Select(row => string.Join("", row.Select(PrintCell))));
-    private static IEnumerable<int> Row(int[] row) => row;
-    private static string PrintCell(int cell) =>
-        !IsQueen(cell)
-            ? IsFree(cell)
-                ? "-"
-                : "x"
-            : "Q";
+
+    public int PlacedQueensCount => array.SelectMany(Row).Count(IsQueen);
+
+
+    #region Printing
+
+    public string Map => Print();
 
     public override string ToString() => Print().Replace(Environment.NewLine, " | ");
 
-    public string Map => Print();
+    public string Print()
+    {
+        return string.Join(Environment.NewLine, Rows.Select(row =>
+            string.Join("", row.Select(PrintCell))));
+
+        static string PrintCell(int cell) =>
+            !IsQueen(cell)
+                ? IsFree(cell)
+                    ? "-"
+                    : "x"
+                : "Q";
+    }
+
+    #endregion
 }

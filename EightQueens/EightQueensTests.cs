@@ -240,6 +240,6 @@ public class EightQueensTests(ITestOutputHelper testOutput)
 
         // Assert
         newBoard.IsNoThreat().Should().BeTrue();
-        newBoard.QueensCount.Should().Be(boardSize);
+        newBoard.PlacedQueensCount.Should().Be(boardSize);
     }
 }
