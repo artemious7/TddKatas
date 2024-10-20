@@ -1,6 +1,6 @@
 ﻿namespace FizzBuzzPlus.Implementation;
 
-public static class SimpleFizzBuzz
+public static class ComponentBasedFizzBuzzPlus
 {
     public static string[] FizzBuzzIt(int[] array, IFizzBuzzer fizzBuzzer, IReverser reverser, IOrderingExpert orderingExpert) =>
         orderingExpert.DetermineOrder(array) == Ordering.Descending
