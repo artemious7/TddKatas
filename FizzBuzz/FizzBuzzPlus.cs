@@ -45,7 +45,7 @@ public class FizzBuzzPlusTests
         results.Should().Equal(expected);
     }
 
-    private string[] ComplexFizzBuzz(int[] array)
+    private static string[] ComplexFizzBuzz(int[] array)
     {
         if (array.Length >= 2 && array[0] > array[1])
         {
@@ -174,7 +174,7 @@ public class FizzBuzzPlusTests
         result.Should().Be(expected);
     }
 
-    private string[] SimpleFizzBuzz(int[] array, IFizzBuzzer fizzBuzzer, IReverser reverser, IOrderingExpert orderingExpert)
+    private static string[] SimpleFizzBuzz(int[] array, IFizzBuzzer fizzBuzzer, IReverser reverser, IOrderingExpert orderingExpert)
     {
         var ordering = orderingExpert.DetermineOrder(array);
         if (ordering == Ordering.Descending)
