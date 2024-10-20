@@ -17,41 +17,31 @@ public sealed class Board
     public Board(int boardSize)
     {
         this.boardSize = boardSize;
-        array = Enumerable.Range(0, boardSize).Select(r => NewArray(boardSize)).ToArray();
+        array = Enumerable.Range(0, boardSize).Select(r => new int[boardSize]).ToArray();
     }
 
-    private IEnumerable<IEnumerable<int>> Rows => array.Select(Row);
+    public Board? PlaceQueens() => PlaceQueensImplementation(queensLeft: boardSize, startRow: 0);
 
-    private static int[] NewArray(int size) => new int[size];
-
-    public Board? PlaceQueens()
-    {
-        var newBoard = PlaceQueensImpl(boardSize, 0);
-        return newBoard;
-    }
-
-    private Board? PlaceQueensImpl(int queensLeft, int startRow = 0)
+    private Board? PlaceQueensImplementation(int queensLeft, int startRow = 0)
     {
         if (queensLeft == 0)
         {
             return this;
         }
+
         if (!HasFreeSpace)
         {
             return null;
         }
 
-
         return Enumerable.Range(startRow, Height - startRow)
             .Select(ProcessRow)
             .FirstOrDefault(r => r is { });
 
-        Board? ProcessRow(int row)
-        {
-            return Enumerable.Range(0, Width)
+        Board? ProcessRow(int row) =>
+            Enumerable.Range(0, Width)
                 .Select(column => ProcessColumn(row, column))
                 .FirstOrDefault(r => r is { });
-        }
 
         Board? ProcessColumn(int row, int column)
         {
@@ -63,15 +53,14 @@ public sealed class Board
             Board potentialBoard = CopyBoard();
             potentialBoard.PlaceQueen(row, column);
 
-            Board? potentialBoardWithQueensPlaced = potentialBoard.PlaceQueensImpl(queensLeft - 1, startRow: row + 1);
-            // if it can be constructed, we found our answer
-            if (potentialBoardWithQueensPlaced is { })
-            {
-                return potentialBoardWithQueensPlaced.CopyBoard();
-            }
-            return null;
+            Board? potentialBoardWithQueensPlaced = potentialBoard.PlaceQueensImplementation(queensLeft - 1, startRow: row + 1);
+            // if it can be constructed, we found our answer. Otherwise, return null.
+            return potentialBoardWithQueensPlaced?.CopyBoard();
         }
     }
+
+    private int Width => boardSize;
+    private int Height => boardSize;
 
     private void PlaceQueen(int queenRow, int queenColumn)
     {
@@ -127,14 +116,13 @@ public sealed class Board
         }
     }
 
-    private int Width => boardSize;
-    private int Height => boardSize;
     private Board CopyBoard() => new(CopyBoardArray(array), boardSize);
 
-    private int[] CopyRow(IEnumerable<int> row) => row.ToArray();
+    private static int[] CopyRow(IEnumerable<int> row) => row.ToArray();
 
-    private int[][] CopyBoardArray(IEnumerable<IEnumerable<int>> array) => array.Select(CopyRow).ToArray();
+    private static int[][] CopyBoardArray(IEnumerable<IEnumerable<int>> array) => array.Select(CopyRow).ToArray();
     private bool HasFreeSpace => Rows.Any(static row => row.Any(IsFree));
+    private IEnumerable<IEnumerable<int>> Rows => array.Select(Row);
     private static bool IsFree(int cell) => cell == 0;
     private bool IsFree(int row, int column)
     {
@@ -216,7 +204,7 @@ public sealed class Board
     private static bool IsQueen(int cell) => cell == Queen;
     public int QueensCount => array.SelectMany(Row).Count(IsQueen);
     public string Print() => string.Join(Environment.NewLine, Rows.Select(row => string.Join("", row.Select(PrintCell))));
-    private IEnumerable<int> Row(int[] row) => row;
+    private static IEnumerable<int> Row(int[] row) => row;
     private static string PrintCell(int cell) =>
         !IsQueen(cell)
             ? IsFree(cell)
