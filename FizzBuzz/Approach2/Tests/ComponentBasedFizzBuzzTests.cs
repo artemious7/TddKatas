@@ -1,8 +1,8 @@
-﻿using FizzBuzzPlus.Implementation;
+﻿using FizzBuzzWithATwist.Approach2.Implementation;
 
-namespace FizzBuzzPlus.Tests;
+namespace FizzBuzzWithATwist.Approach2.Tests;
 
-public class ComponentBasedFizzBuzzPlusTests
+public class ComponentBasedFizzBuzzTests
 {
     [Theory]
     [InlineData(new int[] { }, new string[] { })]
@@ -29,7 +29,7 @@ public class ComponentBasedFizzBuzzPlusTests
         var fizzBuzzer = new FizzBuzzer();
         var reverser = new StringReverser();
         var orderingExpert = new OrderingExpert();
-        var results = ComponentBasedFizzBuzzPlus.FizzBuzzIt(numbers, fizzBuzzer, reverser, orderingExpert);
+        var results = ComponentBasedFizzBuzz.FizzBuzzIt(numbers, fizzBuzzer, reverser, orderingExpert);
         results.Should().Equal(expected);
     }
 
@@ -49,7 +49,7 @@ public class ComponentBasedFizzBuzzPlusTests
         var orderingExpert = Substitute.For<IOrderingExpert>();
         orderingExpert.DetermineOrder(default!).ReturnsForAnyArgs(ordering);
 
-        var results = ComponentBasedFizzBuzzPlus.FizzBuzzIt([1, 2], fizzBuzzer, reverser, orderingExpert);
+        var results = ComponentBasedFizzBuzz.FizzBuzzIt([1, 2], fizzBuzzer, reverser, orderingExpert);
 
         results.Should().Equal(expected);
     }
@@ -72,7 +72,7 @@ public class ComponentBasedFizzBuzzPlusTests
         var orderingExpert = Substitute.For<IOrderingExpert>();
         orderingExpert.DetermineOrder(default!).ReturnsForAnyArgs(Ordering.AscendingOrUnknown);
 
-        var results = ComponentBasedFizzBuzzPlus.FizzBuzzIt(numbers, fizzBuzzer, reverser, orderingExpert);
+        var results = ComponentBasedFizzBuzz.FizzBuzzIt(numbers, fizzBuzzer, reverser, orderingExpert);
 
         results.Should().Equal(expected);
     }

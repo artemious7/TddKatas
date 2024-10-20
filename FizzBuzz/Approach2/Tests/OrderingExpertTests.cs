@@ -1,6 +1,6 @@
-﻿using FizzBuzzPlus.Implementation;
+﻿namespace FizzBuzzWithATwist.Approach2.Tests;
 
-namespace FizzBuzzPlus.Tests;
+using Implementation;
 
 public class OrderingExpertTests
 {

@@ -1,4 +1,4 @@
-﻿namespace FizzBuzzPlus.Implementation;
+﻿namespace FizzBuzzWithATwist.Approach2.Implementation;
 
 public class OrderingExpert : IOrderingExpert
 {

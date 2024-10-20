@@ -1,8 +1,6 @@
-using FizzBuzzPlus.Implementation;
+namespace FizzBuzzWithATwist.Approach1;
 
-namespace FizzBuzzPlus.Tests;
-
-public class ComplexFizzBuzzTests
+public class FizzBuzzTests
 {
     [Theory]
     // zero elements
@@ -43,7 +41,7 @@ public class ComplexFizzBuzzTests
     [InlineData(new[] { 15, 5, 3 }, new[] { "zzub zzif", "zzub", "zzif" })]
     public void Tests(int[] numbers, string[] expected)
     {
-        var results = ComplexFizzBuzz.FizzBuzzIt(numbers);
+        var results = FizzBuzz.FizzBuzzIt(numbers);
         results.Should().Equal(expected);
     }
 }

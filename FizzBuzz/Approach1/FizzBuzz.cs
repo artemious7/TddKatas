@@ -1,6 +1,6 @@
-﻿namespace FizzBuzzPlus.Implementation;
+﻿namespace FizzBuzzWithATwist.Approach1;
 
-public static class ComplexFizzBuzz
+public static class FizzBuzz
 {
     public static string[] FizzBuzzIt(int[] array)
     {
@@ -17,12 +17,12 @@ public static class ComplexFizzBuzz
         }
         else
         {
-            return array.Select(r => r % 15 == 0 ? 
-                "fizz buzz" : 
-                r % 5 == 0 ? 
-                    "buzz" : 
-                    r % 3 == 0 ? 
-                        "fizz" : 
+            return array.Select(r => r % 15 == 0 ?
+                "fizz buzz" :
+                r % 5 == 0 ?
+                    "buzz" :
+                    r % 3 == 0 ?
+                        "fizz" :
                         r.ToString()
             ).ToArray();
         }
