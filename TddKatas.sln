@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BowlingGameScore", "BowlingGameScore\BowlingGameScore.csproj", "{B0353D9D-9257-4249-BEAE-B0BE62F9F923}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{487CFACC-7BFC-41B3-9AE6-85B903D91D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487CFACC-7BFC-41B3-9AE6-85B903D91D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487CFACC-7BFC-41B3-9AE6-85B903D91D25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0353D9D-9257-4249-BEAE-B0BE62F9F923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0353D9D-9257-4249-BEAE-B0BE62F9F923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0353D9D-9257-4249-BEAE-B0BE62F9F923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0353D9D-9257-4249-BEAE-B0BE62F9F923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
