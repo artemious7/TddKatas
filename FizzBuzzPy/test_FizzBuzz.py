@@ -31,6 +31,10 @@ class FizzBuzz100Tests(unittest.TestCase):
         self.assertEqual(['1'], FizzBuzz100(1));
     def test_2_elements(self):
         self.assertEqual(['1', '2'], FizzBuzz100(2));
+    def test_3_elements(self):
+        self.assertEqual(['1', '2', 'Fizz'], FizzBuzz100(3));
+    def test_10_elements(self):
+        self.assertEqual(['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz', 'Buzz'], FizzBuzz100(10));
 
 if __name__ == '__main__':
     unittest.main()

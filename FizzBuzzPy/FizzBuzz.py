@@ -13,8 +13,7 @@ def FizzBuzzIt(input: int):
     return output
 
 def FizzBuzz100(number: int):
-    if number == 1:
-        return [FizzBuzzIt(number)]
-    if number == 2:
-        return [FizzBuzzIt(1), FizzBuzzIt(2)]
-    return []
+    output = []
+    for x in range(number):
+        output += [FizzBuzzIt(x + 1)]
+    return output
