@@ -9,7 +9,7 @@ class FizzBuzzTests(unittest.TestCase):
     def test_3_Returns_Fizz(self):
         self.assertEqual('Fizz', FizzBuzzIt(3))
 
-    def test_5_Returns_Fizz(self):
+    def test_5_Returns_Buzz(self):
         self.assertEqual('Buzz', FizzBuzzIt(5))
 
     def test_15_Returns_FizzBuzz(self):
@@ -18,10 +18,10 @@ class FizzBuzzTests(unittest.TestCase):
     def test_6_Returns_Fizz(self):
         self.assertEqual('Fizz', FizzBuzzIt(6))
 
-    def test_10_Returns_Fizz(self):
+    def test_10_Returns_Buzz(self):
         self.assertEqual('Buzz', FizzBuzzIt(10))
 
-    def test_30_Returns_Fizz(self):
+    def test_30_Returns_FizzBuzz(self):
         self.assertEqual('FizzBuzz', FizzBuzzIt(30))
 
 if __name__ == '__main__':

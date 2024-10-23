@@ -1,8 +1,13 @@
 def FizzBuzzIt(input: int):
-    if input % 3 == 0 and input % 5 == 0:
-        return 'FizzBuzz'
+    output: str = ''
+
     if input % 3 == 0:
-        return 'Fizz'
+        output += 'Fizz'
+
     if input % 5 == 0:
-        return 'Buzz'
-    return str(input)
+        output += 'Buzz'
+
+    if not output:
+        output = str(input)
+
+    return output
