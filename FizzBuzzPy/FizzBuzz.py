@@ -13,4 +13,6 @@ def FizzBuzzIt(input: int):
     return output
 
 def FizzBuzz100(number: int):
+    if number == 1:
+        return [FizzBuzzIt(number)]
     return []
