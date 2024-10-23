@@ -22,7 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FizzBuzzPythonStyle.py" />
     <Compile Include="FizzBuzz.py" />
+    <Compile Include="test_FizzBuzzPythonStyle.py" />
     <Compile Include="test_FizzBuzz.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
