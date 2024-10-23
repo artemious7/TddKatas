@@ -1,6 +1,6 @@
 import unittest
 
-from FizzBuzz import FizzBuzzIt
+from FizzBuzz import FizzBuzz100, FizzBuzzIt
 
 class FizzBuzzTests(unittest.TestCase):
     def test_1_Returns_1(self):
@@ -23,6 +23,10 @@ class FizzBuzzTests(unittest.TestCase):
 
     def test_30_Returns_FizzBuzz(self):
         self.assertEqual('FizzBuzz', FizzBuzzIt(30))
+
+class FizzBuzz100Tests(unittest.TestCase):
+    def test_0_elements(self):
+        self.assertEqual([], FizzBuzz100(0));
 
 if __name__ == '__main__':
     unittest.main()

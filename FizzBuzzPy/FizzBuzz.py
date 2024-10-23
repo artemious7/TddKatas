@@ -11,3 +11,6 @@ def FizzBuzzIt(input: int):
         output = str(input)
 
     return output
+
+def FizzBuzz100(number: int):
+    return []
