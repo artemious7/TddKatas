@@ -36,6 +36,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BowlingGameScoreTS", "Bowli
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "HelloWorld", "HelloWorld\HelloWorld.pyproj", "{AE4F163F-7B1C-4F0D-A5DA-630232444735}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "FizzBuzzPy", "FizzBuzzPy\FizzBuzzPy.pyproj", "{51166462-7282-4BD9-BD4B-BAC4C29512B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,8 @@ Global
 		{ADA9A7A9-C422-44BC-990C-0227C481379C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{AE4F163F-7B1C-4F0D-A5DA-630232444735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE4F163F-7B1C-4F0D-A5DA-630232444735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51166462-7282-4BD9-BD4B-BAC4C29512B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51166462-7282-4BD9-BD4B-BAC4C29512B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
