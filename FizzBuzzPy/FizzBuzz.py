@@ -15,4 +15,6 @@ def FizzBuzzIt(input: int):
 def FizzBuzz100(number: int):
     if number == 1:
         return [FizzBuzzIt(number)]
+    if number == 2:
+        return [FizzBuzzIt(1), FizzBuzzIt(2)]
     return []
