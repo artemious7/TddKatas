@@ -30,7 +30,7 @@ internal class Tennis
         private const int MinimumPointsToWin = 4;
 
         public override string ToString() =>
-            AtLeast3PointScoredByEachAndPointsAreEqual() ?
+            AtLeast3PointsScoredByEachAndPointsAreEqual() ?
                 "deuce" :
                 APlayerHasAtLeast4PointsAndAtLeast2More() ?
                     $"{LeadingPlayer.Role} wins!" :
@@ -42,7 +42,7 @@ internal class Tennis
         private int PointsDifference() =>
             Math.Abs(Server.Points - Opponent.Points);
 
-        private bool AtLeast3PointScoredByEachAndPointsAreEqual() =>
+        private bool AtLeast3PointsScoredByEachAndPointsAreEqual() =>
             Server.Points == Opponent.Points && Server.Points >= 3;
 
         private Player LeadingPlayer => Server.Points >= Opponent.Points ? Server : Opponent;
@@ -50,6 +50,8 @@ internal class Tennis
 
     private record Player(int Points, string Role)
     {
+        private const string Advantage = "A";
+
         public int Points { get; set; } = Points;
 
         public override string ToString() => Points switch
@@ -58,7 +60,7 @@ internal class Tennis
             1 => "15",
             2 => "30",
             3 => "40",
-            _ => "A"
+            _ => Advantage
         };
     }
 }
