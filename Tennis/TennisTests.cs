@@ -23,4 +23,15 @@ public class TennisTests
 
         sut.ScoreDescription.Should().Be("15-love");
     }
+
+    [Fact]
+    public void WhenOpponentScores_ThenLove_15()
+    {
+        var sut = new Tennis();
+        sut.StartGame();
+
+        sut.OpponentScores();
+
+        sut.ScoreDescription.Should().Be("love-15");
+    }
 }

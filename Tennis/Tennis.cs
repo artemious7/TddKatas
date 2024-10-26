@@ -1,4 +1,5 @@
 ﻿
+
 namespace Tennis;
 
 internal class Tennis
@@ -14,6 +15,11 @@ internal class Tennis
     internal void ServerScores()
     {
         Score = Score with { ServerPoints = Score.ServerPoints with { Points = Score.ServerPoints.Points + 1 } };
+    }
+
+    internal void OpponentScores()
+    {
+        Score = Score with { OpponentPoints = Score.OpponentPoints with { Points = Score.OpponentPoints.Points + 1 } };
     }
 }
 
