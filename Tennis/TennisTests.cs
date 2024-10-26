@@ -51,6 +51,7 @@ public class TennisTests
 
     [Theory]
     [InlineData(2, 3)]
+    [InlineData(3, 4)]
     public void GivenDeuce_WhenServerScores_ThenServerHasAdvantage(int serverPoints, int opponentPoints)
     {
         ServerScores(serverPoints);
