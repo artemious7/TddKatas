@@ -80,7 +80,7 @@ public class Friday13thTests(ITestOutputHelper testOutputHelper)
         TestCountsEquality(sunday, sunday.ToDictionary());
     }
 
-    private void TestCountsEquality(ImmutableDictionary<DayOfWeek, int> dictionary1, Dictionary<DayOfWeek, int> dictionary2)
+    private static void TestCountsEquality(ImmutableDictionary<DayOfWeek, int> dictionary1, Dictionary<DayOfWeek, int> dictionary2)
     {
         Assert.Equal(dictionary1, dictionary2);
     }
