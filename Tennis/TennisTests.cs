@@ -37,6 +37,17 @@ public class TennisTests
     }
 
     [Fact]
+    public void GivenScoreIs30_40_WhenServerScores_ThenDeuce()
+    {
+        ServerScores(2);
+        OpponentScores(3);
+
+        ServerScores(1);
+
+        sut.ScoreDescription.Should().Be("deuce");
+    }
+
+    [Fact]
     public void WhenOpponentScores_ThenLove_15()
     {
         sut.OpponentScores();
