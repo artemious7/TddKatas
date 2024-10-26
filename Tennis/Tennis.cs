@@ -1,4 +1,5 @@
-﻿namespace Tennis;
+﻿
+namespace Tennis;
 
 internal class Tennis
 {
@@ -8,6 +9,11 @@ internal class Tennis
     internal void StartGame()
     {
 
+    }
+
+    internal void ServerScores()
+    {
+        Score = Score with { ServerPoints = Score.ServerPoints with { Points = Score.ServerPoints.Points + 1 } };
     }
 }
 
@@ -20,6 +26,11 @@ internal record struct PlayerPoints(int Points)
 {
     public override string ToString()
     {
-        return Points == 0 ? "love" : "";
+        return Points switch
+        {
+            0 => "love",
+            1 => "15",
+            _ => ""
+        };
     }
 }
