@@ -10,7 +10,7 @@ public class Friday13thTests(ITestOutputHelper testOutputHelper)
         [new DateOnly(2024, 10, 1), new object[] { DayOfWeek.Sunday }],
         [new DateOnly(2024, 09, 1), new object[] { DayOfWeek.Sunday, DayOfWeek.Friday }],
         [new DateOnly(2024, 03, 1), new object[] { DayOfWeek.Saturday }],
-        //[new DateOnly(1973, 01, 1), new object[] { DayOfWeek.Friday }],
+        [new DateOnly(1973, 01, 1), new object[] { DayOfWeek.Tuesday }],
     ];
 
     [Theory]
