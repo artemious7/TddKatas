@@ -10,18 +10,17 @@ public class TennisTests
         sut.StartGame();
     }
 
-    [Fact]
-    public void WhenGameStarts_ThenLove_Love()
+    [Theory]
+    [InlineData(0, "love-love")]
+    [InlineData(1, "15-love")]
+    [InlineData(2, "30-love")]
+    [InlineData(3, "40-love")]
+    [InlineData(4, "Server wins!")]
+    public void ServerScoresTests(int times, string expectedScore)
     {
-        sut.ScoreDescription.Should().Be("love-love");
-    }
+        ServerScores(times);
 
-    [Fact]
-    public void WhenServerScores_Then15_Love()
-    {
-        sut.ServerScores();
-
-        sut.ScoreDescription.Should().Be("15-love");
+        sut.ScoreDescription.Should().Be(expectedScore);
     }
 
     [Fact]
@@ -32,33 +31,11 @@ public class TennisTests
         sut.ScoreDescription.Should().Be("love-15");
     }
 
-    [Fact]
-    public void WhenServerScoresTwice_Then30_Love()
+    private void ServerScores(int points)
     {
-        sut.ServerScores();
-        sut.ServerScores();
-
-        sut.ScoreDescription.Should().Be("30-love");
-    }
-
-    [Fact]
-    public void WhenServerScores3Times_Then40_Love()
-    {
-        sut.ServerScores();
-        sut.ServerScores();
-        sut.ServerScores();
-
-        sut.ScoreDescription.Should().Be("40-love");
-    }
-
-    [Fact]
-    public void WhenServerScores4Times_ThenServerWins()
-    {
-        sut.ServerScores();
-        sut.ServerScores();
-        sut.ServerScores();
-        sut.ServerScores();
-
-        sut.ScoreDescription.Should().Be("Server wins!");
+        for (int i = 0; i < points; i++)
+        {
+            sut.ServerScores();
+        }
     }
 }
