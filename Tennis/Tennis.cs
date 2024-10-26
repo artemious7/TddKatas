@@ -34,7 +34,7 @@ internal class Tennis
                 "deuce" :
                 APlayerHasAtLeast4PointsAndAtLeast2More() ?
                     $"{LeadingPlayer.Role} wins!" :
-                    $"{Server}-{Opponent}";
+                    $"{Server.Score(Server != LeadingPlayer)}-{Opponent.Score(Opponent != LeadingPlayer)}";
 
         private bool APlayerHasAtLeast4PointsAndAtLeast2More() =>
             LeadingPlayer.Points >= MinimumPointsToWin && PointsDifference() >= 2;
@@ -54,12 +54,13 @@ internal class Tennis
 
         public int Points { get; set; } = Points;
 
-        public override string ToString() => Points switch
+        public string Score(bool otherPlayerHasAdvantage) => Points switch
         {
             0 => "love",
             1 => "15",
             2 => "30",
             3 => "40",
+            _ when otherPlayerHasAdvantage => "40",
             _ => Advantage
         };
     }
