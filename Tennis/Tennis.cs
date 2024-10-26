@@ -4,33 +4,37 @@ namespace Tennis;
 
 internal class Tennis
 {
-    private GameScore Score = new GameScore(new PlayerPoints(0), new PlayerPoints(0));
+    private GameScore Score = ZeroScore();
     public string ScoreDescription => Score.ToString();
 
     internal void StartGame()
     {
-        Score = new GameScore(new PlayerPoints(0), new PlayerPoints(0));
+        Score = ZeroScore();
     }
+
+    private static GameScore ZeroScore() => new(new(0, "Server"), new(0, "Opponent"));
 
     internal void ServerScores()
     {
-        Score.ServerPoints.Points++;
+        Score.Server.Points++;
     }
 
     internal void OpponentScores()
     {
-        Score.OpponentPoints.Points++;
+        Score.Opponent.Points++;
     }
 
-    private record GameScore(PlayerPoints ServerPoints, PlayerPoints OpponentPoints)
+    private record GameScore(Player Server, Player Opponent)
     {
-        public override string ToString() => 
-            ServerPoints.Points > 3 ? 
-                "Server wins!" : 
-                $"{ServerPoints}-{OpponentPoints}";
+        public override string ToString() =>
+            LeadingPlayer.Points > 3 ?
+                $"{LeadingPlayer.Role} wins!" :
+                $"{Server}-{Opponent}";
+
+        private Player LeadingPlayer => Server.Points >= Opponent.Points ? Server : Opponent;
     }
 
-    private record PlayerPoints(int Points)
+    private record Player(int Points, string Role)
     {
         public int Points { get; set; } = Points;
 

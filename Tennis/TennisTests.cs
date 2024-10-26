@@ -28,6 +28,7 @@ public class TennisTests
     [InlineData(1, "love-15")]
     [InlineData(2, "love-30")]
     [InlineData(3, "love-40")]
+    [InlineData(4, "Opponent wins!")]
     public void OpponentScoresTests(int times, string expectedScore)
     {
         OpponentScores(times);
