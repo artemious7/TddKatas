@@ -17,14 +17,12 @@ internal class Tennis
 
     internal void ServerScores()
     {
-        if (HasAWinner)
+        if (Score.HasAWinner)
         {
             StartGame();
         }
         Score.Server.Points++;
     }
-
-    private bool HasAWinner => Score.HasAWinner;
 
 
     internal void OpponentScores()
@@ -34,20 +32,19 @@ internal class Tennis
 
     private record GameScore(Player Server, Player Opponent)
     {
-        private const int MinimumPointsToWin = 4;
-
-        public bool HasAWinner =>
-            !AtLeast3PointsScoredByEachAndPointsAreEqual() && APlayerHasAtLeast4PointsAndAtLeast2More();
-
         public override string ToString() =>
-            AtLeast3PointsScoredByEachAndPointsAreEqual() ?
-                "deuce" :
-                APlayerHasAtLeast4PointsAndAtLeast2More() ?
-                    $"{Leader.Role} wins!" :
+            HasAWinner ?
+                $"{Leader.Role} wins!" :
+                AtLeast3PointsScoredByEachAndPointsAreEqual() ?
+                    "deuce" :
                     $"{Server.Score(Leader)}-{Opponent.Score(Leader)}";
+
+        public bool HasAWinner => APlayerHasAtLeast4PointsAndAtLeast2More();
 
         private bool APlayerHasAtLeast4PointsAndAtLeast2More() =>
             Leader.Points >= MinimumPointsToWin && PointsDifference() >= 2;
+
+        private const int MinimumPointsToWin = 4;
 
         private int PointsDifference() =>
             Math.Abs(Server.Points - Opponent.Points);
