@@ -25,18 +25,14 @@ internal class Friday13th
 
     internal int[] GetYearsWithMostFridays(int startYear, int endYearInclusive)
     {
-        var yearsByMostFridays = new Dictionary<int /* number of Fridays */, List<int> /* years */>();
-        for (int year = startYear; year <= endYearInclusive; year++)
+        var yearsByNumberOfFridays = new Dictionary<int /* number of Fridays */, List<int> /* years */>();
+        for (var date = new DateOnly(startYear, 1, 1); date.Year <= endYearInclusive; date = date.AddYears(1))
         {
-            var date = new DateOnly(year, 1, 1);
             var counts = GetCounts(date, date.AddYears(1));
             int numberOfFridays = counts[DayOfWeek.Friday];
-            if (!yearsByMostFridays.TryGetValue(numberOfFridays, out var years))
-            {
-                years = yearsByMostFridays[numberOfFridays] = [];
-            }
-            years.Add(year);
+            yearsByNumberOfFridays.TryAdd(numberOfFridays, []);
+            yearsByNumberOfFridays[numberOfFridays].Add(date.Year);
         }
-        return [.. yearsByMostFridays.MaxBy(r => r.Key).Value];
+        return [.. yearsByNumberOfFridays.MaxBy(r => r.Key).Value];
     }
 }
