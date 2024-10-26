@@ -29,11 +29,17 @@ internal class Tennis
         private const int MinimumPointsToWin = 4;
 
         public override string ToString() =>
-            Server.Points == Opponent.Points && Server.Points >= 3 ?
+            AtLeast3PointScoredByEachAndPointsAreEqual() ?
                 "deuce" :
-                LeadingPlayer.Points >= MinimumPointsToWin ?
+                APlayerHasAtLeast4Points() ?
                     $"{LeadingPlayer.Role} wins!" :
                     $"{Server}-{Opponent}";
+
+        private bool APlayerHasAtLeast4Points() => 
+            LeadingPlayer.Points >= MinimumPointsToWin;
+
+        private bool AtLeast3PointScoredByEachAndPointsAreEqual() =>
+            Server.Points == Opponent.Points && Server.Points >= 3;
 
         private Player LeadingPlayer => Server.Points >= Opponent.Points ? Server : Opponent;
     }
