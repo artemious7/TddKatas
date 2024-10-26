@@ -33,11 +33,11 @@ internal class Tennis
             AtLeast3PointsScoredByEachAndPointsAreEqual() ?
                 "deuce" :
                 APlayerHasAtLeast4PointsAndAtLeast2More() ?
-                    $"{LeadingPlayer.Role} wins!" :
-                    $"{Server.Score(Server != LeadingPlayer)}-{Opponent.Score(Opponent != LeadingPlayer)}";
+                    $"{Leader.Role} wins!" :
+                    $"{Server.Score(Leader)}-{Opponent.Score(Leader)}";
 
         private bool APlayerHasAtLeast4PointsAndAtLeast2More() =>
-            LeadingPlayer.Points >= MinimumPointsToWin && PointsDifference() >= 2;
+            Leader.Points >= MinimumPointsToWin && PointsDifference() >= 2;
 
         private int PointsDifference() =>
             Math.Abs(Server.Points - Opponent.Points);
@@ -45,7 +45,7 @@ internal class Tennis
         private bool AtLeast3PointsScoredByEachAndPointsAreEqual() =>
             Server.Points == Opponent.Points && Server.Points >= 3;
 
-        private Player LeadingPlayer => Server.Points >= Opponent.Points ? Server : Opponent;
+        private Player Leader => Server.Points >= Opponent.Points ? Server : Opponent;
     }
 
     private record Player(int Points, string Role)
@@ -54,14 +54,14 @@ internal class Tennis
 
         public int Points { get; set; } = Points;
 
-        public string Score(bool otherPlayerHasAdvantage) => Points switch
+        public string Score(Player leader) => Points switch
         {
             0 => "love",
             1 => "15",
             2 => "30",
             3 => "40",
-            _ when otherPlayerHasAdvantage => "40",
-            _ => Advantage
+            _ when this == leader => Advantage,
+            _ => "40"
         };
     }
 }
