@@ -27,6 +27,10 @@ internal class Tennis
 
     internal void OpponentScores()
     {
+        if (Score.HasAWinner)
+        {
+            StartGame();
+        }
         Score.Opponent.Points++;
     }
 

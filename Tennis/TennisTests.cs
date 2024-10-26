@@ -46,6 +46,16 @@ public class TennisTests
         sut.ScoreDescription.Should().Be("15-love");
     }
 
+    [Fact]
+    public void GivenServerWon_WhenOpponentScores_ThenGameRestartedAndScoreIsLove_15()
+    {
+        ServerScores(4);
+
+        OpponentScores(1);
+
+        sut.ScoreDescription.Should().Be("love-15");
+    }
+
     [Theory]
     [InlineData(2, 3)]
     [InlineData(3, 4)]
