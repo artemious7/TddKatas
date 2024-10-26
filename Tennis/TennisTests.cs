@@ -57,30 +57,40 @@ public class TennisTests
     }
 
     [Theory]
-    [InlineData(2, 3)]
-    [InlineData(3, 4)]
-    public void GivenServerScoresOneLessThanOpponent_WhenServerScores_ThenDeuce(int serverPoints, int opponentPoints)
+    [InlineData(2)]
+    [InlineData(3)]
+    public void GivenServerScoresOneLessThanOpponent_WhenServerScores_ThenDeuce(int serverPoints)
     {
-        ServerScores(serverPoints);
-        OpponentScores(opponentPoints);
+        GivenServerScoresOneLessThanOpponent(serverPoints);
 
         ServerScores(1);
 
         sut.ScoreDescription.Should().Be("deuce");
     }
 
-    [Theory]
-    [InlineData(2, 3)]
-    [InlineData(3, 4)]
-    public void GivenDeuce_WhenServerScores_ThenServerHasAdvantage(int serverPoints, int opponentPoints)
+    private void GivenServerScoresOneLessThanOpponent(int serverPoints)
     {
         ServerScores(serverPoints);
-        OpponentScores(opponentPoints);
-        ServerScores(1);
+        OpponentScores(serverPoints + 1);
+    }
+
+    [Theory]
+    [InlineData(2)]
+    [InlineData(3)]
+    public void GivenDeuce_WhenServerScores_ThenServerHasAdvantage(int serverPoints)
+    {
+        GivenDeuce(serverPoints);
 
         ServerScores(1);
 
         sut.ScoreDescription.Should().Be("A-40");
+    }
+
+    private void GivenDeuce(int initialServerPoints)
+    {
+        ServerScores(initialServerPoints);
+        OpponentScores(initialServerPoints + 1);
+        ServerScores(1);
     }
 
     [Fact]
