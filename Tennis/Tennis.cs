@@ -4,39 +4,41 @@ namespace Tennis;
 
 internal class Tennis
 {
-    private GameScore Score = new GameScore();
+    private GameScore Score = new GameScore(new PlayerPoints(0), new PlayerPoints(0));
     public string ScoreDescription => Score.ToString();
 
     internal void StartGame()
     {
-
+        Score = new GameScore(new PlayerPoints(0), new PlayerPoints(0));
     }
 
     internal void ServerScores()
     {
-        Score = Score with { ServerPoints = Score.ServerPoints with { Points = Score.ServerPoints.Points + 1 } };
+        Score.ServerPoints.Points++;
     }
 
     internal void OpponentScores()
     {
-        Score = Score with { OpponentPoints = Score.OpponentPoints with { Points = Score.OpponentPoints.Points + 1 } };
+        Score.OpponentPoints.Points++;
     }
-}
 
-internal record struct GameScore(PlayerPoints ServerPoints, PlayerPoints OpponentPoints)
-{
-    public override string ToString() => $"{ServerPoints}-{OpponentPoints}";
-}
-
-internal record struct PlayerPoints(int Points)
-{
-    public override string ToString()
+    private record GameScore(PlayerPoints ServerPoints, PlayerPoints OpponentPoints)
     {
-        return Points switch
+        public override string ToString() => $"{ServerPoints}-{OpponentPoints}";
+    }
+
+    private record PlayerPoints(int Points)
+    {
+        public int Points { get; set; } = Points;
+
+        public override string ToString()
         {
-            0 => "love",
-            1 => "15",
-            _ => ""
-        };
+            return Points switch
+            {
+                0 => "love",
+                1 => "15",
+                _ => ""
+            };
+        }
     }
 }
