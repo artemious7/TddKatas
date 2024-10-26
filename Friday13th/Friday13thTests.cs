@@ -63,6 +63,16 @@ public class Friday13thTests(ITestOutputHelper testOutputHelper)
         Assert.True(true);
     }
 
+    [Theory]
+    [InlineData(2015, 2025, new int[] { 2015 })]
+    [InlineData(2015, 2026, new int[] { 2015, 2026 })]
+    public void GetYearsWithMostFridaysTests(int startYear, int endYear, int[] expectedYears)
+    {
+        var sut = new Friday13th();
+        var years = sut.GetYearsWithMostFridays(startYear, endYear);
+        Assert.Equal(expectedYears, years);
+    }
+
     [Fact]
     public void AssertForDictionaryUsesDeepEquality()
     {
