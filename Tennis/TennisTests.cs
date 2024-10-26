@@ -34,4 +34,16 @@ public class TennisTests
 
         sut.ScoreDescription.Should().Be("love-15");
     }
+
+    [Fact]
+    public void WhenServerScoresTwice_Then30_Love()
+    {
+        var sut = new Tennis();
+        sut.StartGame();
+
+        sut.ServerScores();
+        sut.ServerScores();
+
+        sut.ScoreDescription.Should().Be("30-love");
+    }
 }

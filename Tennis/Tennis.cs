@@ -37,6 +37,7 @@ internal class Tennis
             {
                 0 => "love",
                 1 => "15",
+                2 => "30",
                 _ => ""
             };
         }
