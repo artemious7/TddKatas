@@ -49,6 +49,19 @@ public class TennisTests
         sut.ScoreDescription.Should().Be("deuce");
     }
 
+    [Theory]
+    [InlineData(2, 3)]
+    public void GivenDeuce_WhenServerScores_ThenServerHasAdvantage(int serverPoints, int opponentPoints)
+    {
+        ServerScores(serverPoints);
+        OpponentScores(opponentPoints);
+        ServerScores(1);
+
+        ServerScores(1);
+
+        sut.ScoreDescription.Should().Be("A-40");
+    }
+
     [Fact]
     public void WhenOpponentScores_ThenLove_15()
     {

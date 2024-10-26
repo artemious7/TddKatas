@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace Tennis;
 
 internal class Tennis
@@ -31,12 +32,15 @@ internal class Tennis
         public override string ToString() =>
             AtLeast3PointScoredByEachAndPointsAreEqual() ?
                 "deuce" :
-                APlayerHasAtLeast4Points() ?
+                APlayerHasAtLeast4PointsAndAtLeast2More() ?
                     $"{LeadingPlayer.Role} wins!" :
                     $"{Server}-{Opponent}";
 
-        private bool APlayerHasAtLeast4Points() => 
-            LeadingPlayer.Points >= MinimumPointsToWin;
+        private bool APlayerHasAtLeast4PointsAndAtLeast2More() =>
+            LeadingPlayer.Points >= MinimumPointsToWin && PointsDifference() >= 2;
+
+        private int PointsDifference() =>
+            Math.Abs(Server.Points - Opponent.Points);
 
         private bool AtLeast3PointScoredByEachAndPointsAreEqual() =>
             Server.Points == Opponent.Points && Server.Points >= 3;
@@ -54,7 +58,7 @@ internal class Tennis
             1 => "15",
             2 => "30",
             3 => "40",
-            _ => ""
+            _ => "A"
         };
     }
 }
