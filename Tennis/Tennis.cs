@@ -31,16 +31,13 @@ internal class Tennis
     {
         public int Points { get; set; } = Points;
 
-        public override string ToString()
+        public override string ToString() => Points switch
         {
-            return Points switch
-            {
-                0 => "love",
-                1 => "15",
-                2 => "30",
-                3 => "40",
-                _ => ""
-            };
-        }
+            0 => "love",
+            1 => "15",
+            2 => "30",
+            3 => "40",
+            _ => ""
+        };
     }
 }
