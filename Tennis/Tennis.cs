@@ -1,52 +1,48 @@
-﻿
-
-
-namespace Tennis;
+﻿namespace Tennis;
 
 internal class Tennis
 {
-    private GameScore Score = ZeroScore();
-    public string ScoreDescription => Score.ToString();
+    private GameScore Score = LoveLoveScore;
 
-    internal void StartGame()
+    public string ScoreDescription => Score.Description;
+
+    internal void Restart() => Score = LoveLoveScore;
+
+    private static GameScore LoveLoveScore => new(new(0, "Server"), new(0, "Opponent"));
+
+    internal void ServerWinsPoint()
     {
-        Score = ZeroScore();
-    }
-
-    private static GameScore ZeroScore() => new(new(0, "Server"), new(0, "Opponent"));
-
-    internal void ServerScores()
-    {
-        if (Score.HasAWinner)
-        {
-            StartGame();
-        }
+        RestartIfHasAWinner();
         Score.Server.Points++;
     }
 
+    internal void OpponentWinsPoint()
+    {
+        RestartIfHasAWinner();
+        Score.Opponent.Points++;
+    }
 
-    internal void OpponentScores()
+    private void RestartIfHasAWinner()
     {
         if (Score.HasAWinner)
         {
-            StartGame();
+            Restart();
         }
-        Score.Opponent.Points++;
     }
 
     private record GameScore(Player Server, Player Opponent)
     {
-        public override string ToString() =>
+        public string Description =>
             HasAWinner ?
-                $"{Leader.Role} wins!" :
+                $"{LeaderOrAnyPlayer.Role} wins!" :
                 AtLeast3PointsScoredByEachAndPointsAreEqual() ?
                     "deuce" :
-                    $"{Server.Score(Leader)}-{Opponent.Score(Leader)}";
+                    $"{Server.Score(LeaderOrAnyPlayer)}-{Opponent.Score(LeaderOrAnyPlayer)}";
 
         public bool HasAWinner => APlayerHasAtLeast4PointsAndAtLeast2More();
 
         private bool APlayerHasAtLeast4PointsAndAtLeast2More() =>
-            Leader.Points >= MinimumPointsToWin && PointsDifference() >= 2;
+            LeaderOrAnyPlayer.Points >= MinimumPointsToWin && PointsDifference() >= 2;
 
         private const int MinimumPointsToWin = 4;
 
@@ -56,13 +52,11 @@ internal class Tennis
         private bool AtLeast3PointsScoredByEachAndPointsAreEqual() =>
             Server.Points == Opponent.Points && Server.Points >= 3;
 
-        private Player Leader => Server.Points >= Opponent.Points ? Server : Opponent;
+        private Player LeaderOrAnyPlayer => Server.Points >= Opponent.Points ? Server : Opponent;
     }
 
     private record Player(int Points, string Role)
     {
-        private const string Advantage = "A";
-
         public int Points { get; set; } = Points;
 
         public string Score(Player leader) => Points switch
@@ -74,5 +68,7 @@ internal class Tennis
             _ when this == leader => Advantage,
             _ => "40"
         };
+
+        private const string Advantage = "A";
     }
 }

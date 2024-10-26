@@ -7,7 +7,7 @@ public class TennisTests
 
     public TennisTests()
     {
-        sut.StartGame();
+        sut.Restart();
     }
 
     [Theory]
@@ -86,7 +86,7 @@ public class TennisTests
     [Fact]
     public void WhenOpponentScores_ThenLove_15()
     {
-        sut.OpponentScores();
+        sut.OpponentWinsPoint();
 
         sut.ScoreDescription.Should().Be("love-15");
     }
@@ -95,7 +95,7 @@ public class TennisTests
     {
         for (int i = 0; i < points; i++)
         {
-            sut.ServerScores();
+            sut.ServerWinsPoint();
         }
     }
 
@@ -103,7 +103,7 @@ public class TennisTests
     {
         for (int i = 0; i < points; i++)
         {
-            sut.OpponentScores();
+            sut.OpponentWinsPoint();
         }
     }
 }
