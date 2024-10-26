@@ -1,8 +1,9 @@
 using System.Collections.Immutable;
+using Xunit.Abstractions;
 
 namespace Friday13th;
 
-public class Friday13thTests
+public class Friday13thTests(ITestOutputHelper testOutputHelper)
 {
     public static readonly object[][] MostFrequentDayOfWeekData =
     [
@@ -49,6 +50,17 @@ public class Friday13thTests
         var sut = new Friday13th();
         Dictionary<DayOfWeek, int> counts = sut.GetCounts(startDate, new DateOnly(2024, 10, 31));
         TestCountsEquality(expectedCounts, counts);
+    }
+
+    [Fact]
+    public void OutputCountsFrom1973()
+    {
+        DateOnly startDate = new DateOnly(1973, 1, 1);
+        var sut = new Friday13th();
+        Dictionary<DayOfWeek, int> counts = sut.GetCounts(startDate, new DateOnly(2024, 10, 31));
+
+        testOutputHelper.WriteLine(string.Join(Environment.NewLine, counts.Select(r => $"{r.Key}: {r.Value}")));
+        Assert.True(true);
     }
 
     [Fact]
