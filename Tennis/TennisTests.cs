@@ -46,4 +46,17 @@ public class TennisTests
 
         sut.ScoreDescription.Should().Be("30-love");
     }
+
+    [Fact]
+    public void WhenServerScores3Times_Then40_Love()
+    {
+        var sut = new Tennis();
+        sut.StartGame();
+
+        sut.ServerScores();
+        sut.ServerScores();
+        sut.ServerScores();
+
+        sut.ScoreDescription.Should().Be("40-love");
+    }
 }
