@@ -5,6 +5,7 @@ public class Friday13thTests
     public static readonly object[][] Data = 
     [
         [new DateOnly(2024, 10, 1), DayOfWeek.Sunday],
+        [new DateOnly(2024, 9, 1), DayOfWeek.Friday],
     ];
 
     [Theory]
