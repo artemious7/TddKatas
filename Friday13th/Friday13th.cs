@@ -2,17 +2,19 @@
 
 internal class Friday13th
 {
+    private const int DayOfMonth = 13;
+
     internal DayOfWeek GetMostFrequentDayOfWeek(DateOnly startDate, DateOnly endDate)
     {
-        Dictionary<DayOfWeek, int> counts = [];
-        for (DayOfWeek day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
-        {
-            counts[day] = 0;
-        }
-        for (var currentDate = new DateOnly(startDate.Year, startDate.Month, 13); currentDate < endDate; currentDate = currentDate.AddMonths(1))
+        Dictionary<DayOfWeek, int> counts = Enumerable.Range(0, 7)
+            .Select(days => DayOfWeek.Sunday + days)
+            .ToDictionary(dayOfWeek => dayOfWeek, _ => 0);
+
+        for (var currentDate = new DateOnly(startDate.Year, startDate.Month, DayOfMonth); currentDate < endDate; currentDate = currentDate.AddMonths(1))
         {
             counts[currentDate.DayOfWeek]++;
         }
+
         return counts.MaxBy(r => r.Value).Key;
     }
 }
