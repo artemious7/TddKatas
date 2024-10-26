@@ -26,8 +26,10 @@ internal class Tennis
 
     private record GameScore(Player Server, Player Opponent)
     {
+        private const int MinimumPointsToWin = 4;
+
         public override string ToString() =>
-            LeadingPlayer.Points > 3 ?
+            LeadingPlayer.Points >= MinimumPointsToWin ?
                 $"{LeadingPlayer.Role} wins!" :
                 $"{Server}-{Opponent}";
 
