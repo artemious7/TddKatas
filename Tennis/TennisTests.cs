@@ -36,22 +36,13 @@ public class TennisTests
         sut.ScoreDescription.Should().Be(expectedScore);
     }
 
-    [Fact]
-    public void GivenScoreIs30_40_WhenServerScores_ThenDeuce()
+    [Theory]
+    [InlineData(2, 3)]
+    [InlineData(3, 4)]
+    public void GivenServerScoresOneLessThanOpponent_WhenServerScores_ThenDeuce(int serverPoints, int opponentPoints)
     {
-        ServerScores(2);
-        OpponentScores(3);
-
-        ServerScores(1);
-
-        sut.ScoreDescription.Should().Be("deuce");
-    }
-
-    [Fact]
-    public void GivenPointsAre3_4_WhenServerScores_ThenDeuce()
-    {
-        ServerScores(3);
-        OpponentScores(4);
+        ServerScores(serverPoints);
+        OpponentScores(opponentPoints);
 
         ServerScores(1);
 
