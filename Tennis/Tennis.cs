@@ -24,7 +24,10 @@ internal class Tennis
 
     private record GameScore(PlayerPoints ServerPoints, PlayerPoints OpponentPoints)
     {
-        public override string ToString() => $"{ServerPoints}-{OpponentPoints}";
+        public override string ToString() => 
+            ServerPoints.Points > 3 ? 
+                "Server wins!" : 
+                $"{ServerPoints}-{OpponentPoints}";
     }
 
     private record PlayerPoints(int Points)

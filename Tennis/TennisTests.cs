@@ -50,4 +50,15 @@ public class TennisTests
 
         sut.ScoreDescription.Should().Be("40-love");
     }
+
+    [Fact]
+    public void WhenServerScores4Times_ThenServerWins()
+    {
+        sut.ServerScores();
+        sut.ServerScores();
+        sut.ServerScores();
+        sut.ServerScores();
+
+        sut.ScoreDescription.Should().Be("Server wins!");
+    }
 }
