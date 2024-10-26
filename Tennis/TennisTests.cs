@@ -23,6 +23,18 @@ public class TennisTests
         sut.ScoreDescription.Should().Be(expectedScore);
     }
 
+    [Theory]
+    [InlineData(0, "love-love")]
+    [InlineData(1, "love-15")]
+    [InlineData(2, "love-30")]
+    [InlineData(3, "love-40")]
+    public void OpponentScoresTests(int times, string expectedScore)
+    {
+        OpponentScores(times);
+
+        sut.ScoreDescription.Should().Be(expectedScore);
+    }
+
     [Fact]
     public void WhenOpponentScores_ThenLove_15()
     {
@@ -36,6 +48,14 @@ public class TennisTests
         for (int i = 0; i < points; i++)
         {
             sut.ServerScores();
+        }
+    }
+
+    private void OpponentScores(int points)
+    {
+        for (int i = 0; i < points; i++)
+        {
+            sut.OpponentScores();
         }
     }
 }
