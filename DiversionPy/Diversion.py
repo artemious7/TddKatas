@@ -1,4 +1,4 @@
-def answer(sequenceLength: int):
+def naive_approach(sequenceLength: int):
 
     def permutations():
         if sequenceLength == 0:
