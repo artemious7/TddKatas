@@ -11,5 +11,8 @@ class DiversionTests(unittest.TestCase):
     def test_2(self):
         self.assertEqual(Diversion.answer(2), 3)
 
+    def test_3(self):
+        self.assertEqual(Diversion.answer(3), 5)
+
 if __name__ == '__main__':
     unittest.main()
