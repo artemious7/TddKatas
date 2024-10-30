@@ -11,6 +11,7 @@ class DiversionTests(unittest.TestCase):
         self.assertEqual(Diversion.proof_step4(input), expected)
         self.assertEqual(Diversion.proof_step5(input), expected)
         self.assertEqual(Diversion.fibonacci(input), expected)
+        self.assertEqual(Diversion.fibonacci_fast(input), expected)
 
     def test_0(self):
         self.execute_test(0, 1)
@@ -29,6 +30,12 @@ class DiversionTests(unittest.TestCase):
 
     def test_10(self):
         self.execute_test(10, 144)
+
+    def test_fibonacci_fast_4(self):
+        self.assertEqual(Diversion.fibonacci_fast(4), 8)
+
+    def test_fibonacci_fast_50(self):
+        self.assertEqual(Diversion.fibonacci_fast(50), 32_951_280_099)
 
 
 if __name__ == "__main__":
