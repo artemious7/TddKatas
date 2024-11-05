@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tennis", "Tennis\Tennis.csp
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DiversionPy", "DiversionPy\DiversionPy.pyproj", "{2A9AF80F-89E6-477D-8D0A-A80694117F9E}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "IntegersIntersectionPy", "IntegersIntersectionPy\IntegersIntersectionPy.pyproj", "{0592B8EB-2A7C-4977-865F-6D1EA94AD878}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,8 @@ Global
 		{DA591EA5-4EE3-4D71-8827-7E4455DC0AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A9AF80F-89E6-477D-8D0A-A80694117F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A9AF80F-89E6-477D-8D0A-A80694117F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0592B8EB-2A7C-4977-865F-6D1EA94AD878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0592B8EB-2A7C-4977-865F-6D1EA94AD878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
