@@ -25,4 +25,10 @@ internal static class ClosestTo0
         }
         return closest;
     }
+
+    private static readonly IComparer<int> comparer = Comparer<int>.Create(new Comparison<int>((a, b) => Math.Abs(a).CompareTo(Math.Abs(b))));
+    public static int Approach3(int[] input)
+    {
+        return input.OrderDescending().Min(comparer);
+    }
 }

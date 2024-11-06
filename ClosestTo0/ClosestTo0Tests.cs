@@ -15,6 +15,7 @@ public class ClosestTo0Tests
     {
         Assert.Equal(expected, ClosestTo0.Approach1(input));
         Assert.Equal(expected, ClosestTo0.Approach2(input));
+        Assert.Equal(expected, ClosestTo0.Approach3(input));
     }
 
 }
